@@ -87,6 +87,13 @@
             <version>4.0.22</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>7.2.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

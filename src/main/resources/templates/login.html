@@ -51,15 +51,17 @@
 </head>
 <body>
 <div class="login-card">
-  <h1 th:text="${message}">QA Universe</h1>
-  <form action="/api/login" method="post">
+  <h1>QA Universe Auth</h1>
+  <form th:action="@{/login}" th:object="${loginRequest}" method="post">
     <div class="form-group">
       <label>Телефон:</label>
-      <input type="text" name="phone" placeholder="+79991234567" required>
+      <input type="text" th:field="*{phone}" placeholder="+79991234567">
+      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: #ff4c4c; font-size: 0.8rem;"></p>
     </div>
     <div class="form-group">
-      <label>Пароль:</label>
-      <input type="password" name="password" required>
+      <label>Пароль (qwerty):</label>
+      <input type="password" th:field="*{password}">
+      <p th:if="${error}" th:text="${error}" style="color: #ff4c4c; font-size: 0.8rem;"></p>
     </div>
     <button type="submit">LOGIN</button>
   </form>

@@ -1,4 +1,6 @@
+package api;
 
+import core.BaseTest;
 import qa.universe.dto.LoginRequest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
