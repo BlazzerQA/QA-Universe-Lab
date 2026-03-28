@@ -1,27 +1,13 @@
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import qa.universe.dto.LoginRequest;
 
+import qa.universe.dto.LoginRequest;
+import io.restassured.http.ContentType;
+import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LoginTest {
 
-    @LocalServerPort
-    private int port;
-
-    @BeforeMethod
-    public void setUp(){
-
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
-    }
+public class LoginTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() {
@@ -35,10 +21,10 @@ public class LoginTest {
         .when()
                .post("/api/login")
         .then()
+                .log().all()
                .statusCode(200)
                .body("status", equalTo("success"))
                .body("token", notNullValue());
-
 
     }
 }
