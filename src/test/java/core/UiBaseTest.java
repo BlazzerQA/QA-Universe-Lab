@@ -16,6 +16,8 @@ public class UiBaseTest extends BaseTest {
         Configuration.headless = false;
         Configuration.timeout = 5000;
 
+        Configuration.reportsFolder = "target/allure-results/screenshots";
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(false));
