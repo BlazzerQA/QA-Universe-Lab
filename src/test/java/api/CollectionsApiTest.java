@@ -71,4 +71,15 @@ public class CollectionsApiTest extends BaseTest {
                 .body("timeout", is("5000"));
     }
 
+    @Test
+    @Description("Передача строки вместо числа")
+    public void testInvalidDataType() {
+        given()
+                .queryParam("id", "not_a_number")
+        .when()
+                .post("/api/collections/set")
+        .then()
+                .statusCode(400);
+    }
+
 }

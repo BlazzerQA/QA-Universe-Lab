@@ -20,7 +20,7 @@ public class WebSiteController {
     @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
-        return "login";  //TODO: Разобраться почему не возвращается message
+        return "login";
     }
 
     @PostMapping("/login")
