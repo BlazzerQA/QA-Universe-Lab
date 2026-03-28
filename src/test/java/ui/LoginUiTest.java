@@ -2,6 +2,8 @@ package ui;
 
 import core.UiBaseTest;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import pages.RoadmapPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -9,6 +11,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginUiTest extends UiBaseTest {
+
+    LoginPage loginPage = new LoginPage();
+    RoadmapPage roadmapPage = new RoadmapPage();
 
     @Test
     public void testFullUserJourney() {
@@ -20,21 +25,37 @@ public class LoginUiTest extends UiBaseTest {
         $("h1").shouldHave(text("QA Universe Auth"));
 
         //3. Вводим успешные данные
-        $("input[name='phone']").setValue("+79991112233");
-        $("input[name='password']").setValue("qwerty");
-
-        //4. Входим по кнопке
-        $("button").click();
+        loginPage.login("+79991112233", "qwerty");
 
         //5. Проверяем, что находимся на нужной странице
-        $(".header h1").shouldHave(text("Roadmap: QA Automation"));
-        $(".container").shouldHave(text("Java Collections"));
+        roadmapPage.header.shouldHave(text("Roadmap: QA Automation"));
 
         //6. Выходим по кнопке "Выйти"
-        $(".logout-btn").click();
+        roadmapPage.logout();
 
         //7. Проверяем, что вышли - просто если видим кнопку LOGIN
         $("button").shouldBe(visible);
+    }
 
+
+    @Test
+    public void testInvalidPasswordShowsError() {
+        open("/login");
+
+        loginPage.login("+79991112233", "some-password");
+
+        loginPage.checkErrorMessage("Неверный пароль!");
+
+        $("h1").shouldHave(text("QA Universe Auth"));
+    }
+
+
+    @Test
+    public void testInvalidPhoneFormat() {
+        open("/login");
+
+        loginPage.login("89991112233", "qwerty");
+
+        loginPage.checkErrorMessage("Неверный формат номера. Используйте +7XXXXXXXXXX");
     }
 }
