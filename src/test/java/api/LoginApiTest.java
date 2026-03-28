@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 
-public class LoginTest extends BaseTest {
+public class LoginApiTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() {

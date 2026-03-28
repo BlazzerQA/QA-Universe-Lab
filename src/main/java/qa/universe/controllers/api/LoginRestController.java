@@ -1,4 +1,4 @@
-package qa.universe.controllers;
+package qa.universe.controllers.api;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-public class LoginController {
+public class LoginRestController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {

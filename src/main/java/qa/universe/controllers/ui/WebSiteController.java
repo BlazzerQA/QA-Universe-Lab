@@ -1,4 +1,4 @@
-package qa.universe.controllers;
+package qa.universe.controllers.ui;
 
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
