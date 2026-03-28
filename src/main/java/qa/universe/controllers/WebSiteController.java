@@ -49,5 +49,15 @@ public class WebSiteController {
         return "redirect:/login";
     }
 
+    @GetMapping("/collections")
+    public String collectionsPage() {
+        return "collections";
+    }
+
+    @GetMapping("/mocks")
+    public String mocksPage() {
+        return "mocks";
+    }
+
 
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Mocks & Stubs - Interview Prep</title>
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; padding: 30px; }
+        .container { max-width: 900px; margin: auto; }
+        .back-link { color: #00ff41; text-decoration: none; margin-bottom: 20px; display: inline-block; }
+        .card { background: #1e1e1e; margin-bottom: 20px; padding: 20px; border-radius: 8px; border: 1px solid #333; }
+        .question { cursor: pointer; font-weight: bold; font-size: 1.1em; color: #00ff41; }
+        .answer { display: none; margin-top: 15px; color: #e0e0e0; border-left: 2px solid #00ff41; padding-left: 15px; font-style: italic; }
+        .task-box { background: #2a2a2a; padding: 10px; margin-top: 15px; border-radius: 4px; font-family: monospace; color: #ffca28; }
+        .copy-btn { margin-top: 10px; background: #00ff41; color: #000; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        h2 { color: #00ff41; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/roadmap" class="back-link">← Назад к Roadmap</a>
+    <h2>Mockito: Изоляция и заглушки</h2>
+
+    <div class="card">
+        <div class="question" onclick="toggle(this)">1. В чем разница между Mock и Spy?</div>
+        <div class="answer">Ответ: Mock — это полная пустышка, все методы возвращают null/0. Spy — это обертка над реальным объектом, методы работают по-настоящему, если их не "застабить".</div>
+        <div class="task-box" id="m1">// ЗАДАЧА: Создай Mock для интерфейса List. Настрой его так, чтобы при вызове list.get(0) возвращалась строка "Mockito".</div>
+        <button class="copy-btn" onclick="copyAndGo('m1')">Копировать задачу</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggle(this)">2. Что такое Stubbing (стаббинг)?</div>
+        <div class="answer">Ответ: Это процесс жесткого задания поведения метода. Мы говорим: "Когда вызовут метод А с параметром Б, верни результат В". Используются конструкции when(...).thenReturn(...).</div>
+        <div class="task-box" id="m2">// ЗАДАЧА: Застабь метод userService.getUserName(1) так, чтобы он выбрасывал RuntimeException.</div>
+        <button class="copy-btn" onclick="copyAndGo('m2')">Копировать задачу</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggle(this)">3. Как проверить, что метод был вызван (Verify)?</div>
+        <div class="answer">Ответ: С помощью verify(mock).method(). Можно уточнить количество вызовов: times(1), never(), atLeastOnce().</div>
+        <div class="task-box" id="m3">// ЗАДАЧА: Проверь, что метод emailService.send() был вызван ровно 2 раза с любым аргументом.</div>
+        <button class="copy-btn" onclick="copyAndGo('m3')">Копировать задачу</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggle(this)">4. Что делает ArgumentCaptor?</div>
+        <div class="answer">Ответ: Он позволяет "перехватить" аргумент, который был передан в метод мока, чтобы потом проверить его внутренние поля через Assertions.</div>
+        <div class="task-box" id="m4">// ЗАДАЧА: Перехвати объект User, переданный в save(user), и проверь, что его поле name равно "Admin".</div>
+        <button class="copy-btn" onclick="copyAndGo('m4')">Копировать задачу</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggle(this)">5. Зачем использовать @InjectMocks?</div>
+        <div class="answer">Ответ: Эта аннотация автоматически создает тестируемый объект и подставляет (инжектит) в него все созданные моки (@Mock).</div>
+        <div class="task-box" id="m5">// ЗАДАЧА: Напиши структуру теста, где PaymentService тестируется с использованием заинжекченного MockPaymentGateway.</div>
+        <button class="copy-btn" onclick="copyAndGo('m5')">Копировать задачу</button>
+    </div>
+</div>
+
+<script>
+    function toggle(el) {
+        const ans = el.nextElementSibling;
+        ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+    }
+    function copyAndGo(id) {
+        const code = document.getElementById(id).innerText;
+        const template = "import static org.mockito.Mockito.*;\nimport org.mockito.*;\n\npublic class MockTest {\n    public static void main(String[] args) {\n        " + code + "\n    }\n}";
+        navigator.clipboard.writeText(template).then(() => {
+            alert("Задача скопирована! Не забудь выбрать Java на сайте.");
+            window.open("https://interview.cups.online/", "_blank");
+        });
+    }
+</script>
+</body>
+</html>

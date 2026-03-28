@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Java Collections - Interview Prep</title>
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; padding: 30px; }
+        .container { max-width: 900px; margin: auto; }
+        .back-link { color: #00ff41; text-decoration: none; margin-bottom: 20px; display: inline-block; }
+        .card { background: #1e1e1e; margin-bottom: 20px; padding: 20px; border-radius: 8px; border: 1px solid #333; position: relative; }
+        .card:hover { border-color: #00ff41; }
+        .question { cursor: pointer; font-weight: bold; display: block; font-size: 1.1em; }
+        .answer { display: none; margin-top: 15px; color: #00ff41; border-top: 1px solid #333; padding-top: 10px; font-style: italic; }
+        .task-box { background: #2a2a2a; padding: 10px; margin-top: 15px; border-radius: 4px; font-family: monospace; font-size: 0.9em; color: #ffca28; }
+        .copy-btn { margin-top: 10px; background: #00ff41; color: #000; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .copy-btn:active { transform: scale(0.95); }
+        h2 { color: #00ff41; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/roadmap" class="back-link">← Назад к Roadmap</a>
+    <h2>Java Collections: Тренажер</h2>
+
+    <div class="card">
+        <div class="question" onclick="toggleAnswer(this)">1. ArrayList vs LinkedList: в чем разница? ▾</div>
+        <div class="answer">Ответ: ArrayList — массив (быстрый доступ), LinkedList — список (быстрая вставка в начало).</div>
+        <div class="task-box" id="task1">// ЗАДАЧА: Напиши метод, который удаляет дубликаты из ArrayList целых чисел, не используя Set.</div>
+        <button class="copy-btn" onclick="copyAndGo('task1')">Копировать задачу и открыть редактор</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggleAnswer(this)">2. Как работает HashMap? ▾</div>
+        <div class="answer">Ответ: Использует hashCode() для поиска корзины и equals() для поиска внутри корзины (связный список/дерево).</div>
+        <div class="task-box" id="task2">// ЗАДАЧА: Дан массив строк. Используя HashMap, найди строку, которая встречается чаще всего.</div>
+        <button class="copy-btn" onclick="copyAndGo('task2')">Копировать задачу и открыть редактор</button>
+    </div>
+
+    <div class="card">
+        <div class="question" onclick="toggleAnswer(this)">3. TreeSet vs HashSet? ▾</div>
+        <div class="answer">Ответ: HashSet не гарантирует порядок (O(1)), TreeSet хранит элементы в отсортированном виде (O(log n)).</div>
+        <div class="task-box" id="task3">// ЗАДАЧА: Создай TreeSet и добавь в него 5 имен. Выведи их в обратном алфавитном порядке.</div>
+        <button class="copy-btn" onclick="copyAndGo('task3')">Копировать задачу и открыть редактор</button>
+    </div>
+</div>
+
+<script>
+    function toggleAnswer(el) {
+        const answer = el.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function copyAndGo(taskId) {
+        const text = document.getElementById(taskId).innerText;
+        const fullCode = "public class Solution {\n    public static void main(String[] args) {\n        " + text + "\n    }\n}";
+
+        navigator.clipboard.writeText(fullCode).then(() => {
+            alert("Код задачи скопирован! Теперь нажми Ctrl+V в редакторе.");
+            window.open("https://interview.cups.online/", "_blank");
+        });
+    }
+</script>
+</body>
+</html>
