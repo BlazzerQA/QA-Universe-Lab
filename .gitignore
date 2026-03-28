@@ -3,6 +3,13 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Отчеты Allure
+/allure-results/
+/allure-report/
+
+# Папка со скриншотами и логами Selenide
+/build/
+
 ### IntelliJ IDEA ###
 .idea/
 .idea/modules.xml
