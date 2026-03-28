@@ -1,6 +1,7 @@
 package ui;
 
 import core.UiBaseTest;
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.RoadmapPage;
@@ -16,6 +17,7 @@ public class LoginUiTest extends UiBaseTest {
     RoadmapPage roadmapPage = new RoadmapPage();
 
     @Test
+    @Description("Проверка полного успешного пути пользователя")
     public void testFullUserJourney() {
 
         //1. Открываем страничку
@@ -39,6 +41,7 @@ public class LoginUiTest extends UiBaseTest {
 
 
     @Test
+    @Description("Проверка вывода ошибки при неверном пароле")
     public void testInvalidPasswordShowsError() {
         open("/login");
 
@@ -51,6 +54,7 @@ public class LoginUiTest extends UiBaseTest {
 
 
     @Test
+    @Description("Проверка вывода ошибки при вводе неверного формата номера")
     public void testInvalidPhoneFormat() {
         open("/login");
 
