@@ -1,0 +1,27 @@
+name: QA Lab CI
+
+# 1. Когда запускать (Триггеры)
+on:
+  push:
+    branches: [ "main" ] # Запуск при каждом пуше в основную ветку
+  pull_request:
+    branches: [ "main" ] # Запуск при попытке слияния в основную ветку
+
+# 2. Что именно делать (Шаги)
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Берем чистый сервер на Linux
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4 # Копируем твой код из репозитория на этот сервер
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4 # Устанавливаем Java 21
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven # Кэшируем зависимости, чтобы тесты летали быстрее
+
+      - name: Build and Run Tests
+        run: mvn test -Dtest='!*UiTest'
