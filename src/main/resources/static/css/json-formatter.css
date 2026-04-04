@@ -84,18 +84,31 @@ button {
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 button:hover {
     background: #00cc33;
+    box-shadow: 0 0 10px #00ff41, 0 0 4px #00ff41;
+    transform: translateY(-1px);
 }
+
+/* Эффект "нажатия" при клике */
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 5px #00ff41;
+}
+
 button.clear-btn {
     background: #ff4c4c;
     color: white;
 }
 button.clear-btn:hover {
     background: #cc0000;
+    box-shadow: 0 0 10px #ff4c4c, 0 0 4px #ff4c4c;
 }
+
 .error-message {
     color: #ff4c4c;
     margin-top: 10px;
@@ -211,12 +224,13 @@ h3 {
     padding: 4px 10px;
     font-size: 12px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.2s ease;
 }
 .toggle-panel-btn:hover {
     background: #00ff41;
     color: #121212;
     border-color: #00ff41;
+    box-shadow: 0 0 6px #00ff41;
 }
 
 /* Свёрнутая левая панель */
