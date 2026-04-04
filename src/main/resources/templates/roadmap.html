@@ -9,16 +9,19 @@
 <body>
 <div class="floating-background"> </div>
 
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+    <h1>Roadmap: QA Automation</h1>
+    <div class="header-buttons">
+        <a href="/logout" class="logout-btn">ВЫЙТИ</a>
+    </div>
+</div>
+
+<!-- ОСНОВНОЙ КОНТЕЙНЕР -->
 <div class="container">
-    <div class="header">
-
-        <h1>Roadmap: QA Automation</h1>
-
-        <div class="button-group">
-            <a href="/json-formatter" class="json-btn">JSON Formatter</a>
-            <a href="/logout" class="logout-btn">ВЫЙТИ</a>
-        </div>
-
+    <div class="button-group">
+        <a href="/json-formatter" class="json-btn">JSON Formatter</a>
+        <a href="javascript:void(0)" id="virusBtn" class="virus-btn">☠️ НЕ НАЖИМАТЬ!</a>
     </div>
 
     <div class="topic-card">
@@ -42,6 +45,32 @@
         <ul><li>Selenide/Playwright — визуализация действий пользователя.</li></ul>
     </div>
 </div>
+<div id="scaryOverlay" class="scary-overlay" style="display: none;">
+    <div class="scary-message">
+        <div class="blinking-text">
+            ⚠️ ВНИМАНИЕ! ЗАПУЩЕНА СИСТЕМА УДАЛЕНИЯ ОПЕРАЦИОННОЙ СИСТЕМЫ! ⚠️
+        </div>
+        <div class="exclamation-marks">
+            !!! !!! !!!
+        </div>
+    </div>
+</div>
 <script th:src="@{/js/roadmap-bg.js}"></script>
+<script>
+    const virusBtn = document.getElementById('virusBtn');
+    const scaryOverlay = document.getElementById('scaryOverlay');
+
+    if (virusBtn && scaryOverlay) {
+        virusBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            scaryOverlay.style.display = 'flex';
+
+            setTimeout(() => {
+                window.location.href = 'https://avatars.mds.yandex.net/i?id=7072d2699522c002261da3c214a7b288_l-10638736-images-thumbs&n=13';
+            }, 3000);
+        });
+    }
+</script>
 </body>
 </html>
