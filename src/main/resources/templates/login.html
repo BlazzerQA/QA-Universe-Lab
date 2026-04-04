@@ -6,7 +6,9 @@
   <link rel="stylesheet" th:href="@{/css/login.css}">
 
 </head>
+
 <body>
+<canvas id="codeCanvas"></canvas>
 <div class="login-card">
   <h1>QA Universe Auth</h1>
   <form th:action="@{/login}" th:object="${loginRequest}" method="post">
@@ -23,5 +25,6 @@
     <button type="submit">LOGIN</button>
   </form>
 </div>
+<script th:src="@{/js/matrix-bg.js}"></script>
 </body>
 </html>

@@ -16,11 +16,25 @@ body {
     padding-bottom: 20px;
  }
 .topic-card {
-    background: #1e1e1e;
+    background: rgba(30, 30, 40, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     margin: 15px 0;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     border-left: 5px solid #00ff41;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Лёгкое увеличение при наведении для интерактива */
+.topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: rgba(30, 30, 40, 0.6);
 }
 
 .logout-btn {
@@ -69,5 +83,45 @@ li { margin-bottom: 10px; color: #bbb; }
     }
     100% {
         box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+/* Контейнер для плавающих иконок */
+.floating-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* Чтобы иконки не мешали кликать по кнопкам */
+    overflow: hidden;
+    opacity: 0.6;
+}
+
+/* Стили для каждой плавающей иконки */
+.floating-icon {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    animation: float linear infinite;
+    filter: blur(0.5px); /* Лёгкое размытие для более мягкого вида */
+}
+
+/* Ключевые кадры анимации плавания */
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--opacity); /* Плавное появление */
+    }
+    90% {
+        opacity: var(--opacity);
+    }
+    100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
     }
 }
