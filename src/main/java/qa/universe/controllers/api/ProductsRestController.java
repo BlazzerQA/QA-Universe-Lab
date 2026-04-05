@@ -3,7 +3,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import qa.universe.model.Product;
+import qa.universe.models.Product;
 
 import org.springframework.web.bind.annotation.*;
 

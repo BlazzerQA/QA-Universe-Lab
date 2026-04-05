@@ -1,4 +1,4 @@
-package qa.universe.model;
+package qa.universe.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
