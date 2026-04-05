@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Formatter | QA Universe</title>
+  <link rel="stylesheet" th:href="@{/css/json-formatter.css}">
+
+</head>
+<body>
+<div class="container">
+  <div>
+    <h1>📦 JSON Formatter & Tree Viewer</h1>
+    <a href="/roadmap" class="back-link">← Назад к Roadmap</a>
+  </div>
+  <div class="editor-area">
+    <div class="input-panel">
+      <h3>✏️ Введите сырой JSON</h3>
+      <textarea id="jsonInput" placeholder='Например: { "name": "QA", "tools": ["Postman", "RestAssured"] }'></textarea>
+      <div class="button-group">
+        <button id="formatBtn">🎨 Отформатировать</button>
+        <button id="clearBtn" class="clear-btn">🗑 Очистить</button>
+        <button id="exampleBtn">📋 Пример</button>
+      </div>
+      <div id="errorMsg" class="error-message"></div>
+    </div>
+    <div class="output-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>🌳 Древовидная структура</h3>
+        <button
+                id="togglePanelBtn"
+                class="toggle-panel-btn"
+                title="Свернуть/развернуть левую панель">◀ Скрыть редактор JSON
+        </button>
+      </div>
+
+      <div id="jsonTreeContainer" class="json-viewer">
+        <i style="color: #888;">Здесь появится дерево после форматирования</i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/js/json-formatter.js}"></script>
+</body>
+</html>

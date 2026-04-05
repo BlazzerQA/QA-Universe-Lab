@@ -70,5 +70,14 @@ public class WebSiteController {
         return "mocks";
     }
 
+    @GetMapping("/json-formatter")
+    public String jsonFormatterPage(Model model) {
+        String exampleJson = "{\n  \"name\": \"QA Universe\"," +
+                "\n  \"tools\": [\"Spring\", \"Thymeleaf\", \"JUnit\"]," +
+                "\n  \"config\": {\"timeout\": 30}\n}";
+        model.addAttribute("jsonData", exampleJson);
+        return "json-formatter";
+    }
+
 
 }
