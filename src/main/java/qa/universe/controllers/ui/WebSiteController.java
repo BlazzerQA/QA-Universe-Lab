@@ -22,16 +22,16 @@ public class WebSiteController {
 
     @GetMapping("/")
     public String redirectToLogin() {
-        return "redirect:/login"; // Перенаправляем пользователя
+        return "redirect:/aut/login"; // Перенаправляем пользователя
     }
 
-    @GetMapping("/login")
+    @GetMapping("/aut/login")
     public String showLoginPage(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/aut/login")
     public String performLogin(@Valid @ModelAttribute("loginRequest") LoginRequest request,
                                BindingResult bindingResult, Model model) {
 
