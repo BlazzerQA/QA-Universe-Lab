@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>QA Roadmap</title>
-    <style>
-        body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; padding: 50px; }
-        .container { max-width: 800px; margin: auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #00ff41; padding-bottom: 20px; }
-        .topic-card { background: #1e1e1e; margin: 15px 0; padding: 20px; border-radius: 8px; border-left: 5px solid #00ff41; }
-        .logout-btn { background: #ff4c4c; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; }
-        h3 { color: #00ff41; margin-top: 0; }
-        ul { list-style: none; padding-left: 0; }
-        li { margin-bottom: 10px; color: #bbb; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/roadmap.css}">
+
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>Roadmap: QA Automation</h1>
+<div class="floating-background"> </div>
+
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+    <h1>Roadmap: QA Automation</h1>
+    <div class="header-buttons">
         <a href="/logout" class="logout-btn">ВЫЙТИ</a>
+    </div>
+</div>
+
+<!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+<div class="container">
+    <div class="button-group">
+        <a href="/json-formatter" class="json-btn">JSON Formatter</a>
+        <a href="javascript:void(0)" id="virusBtn" class="virus-btn">☠️ НЕ НАЖИМАТЬ!</a>
     </div>
 
     <div class="topic-card">
@@ -42,5 +45,32 @@
         <ul><li>Selenide/Playwright — визуализация действий пользователя.</li></ul>
     </div>
 </div>
+<div id="scaryOverlay" class="scary-overlay" style="display: none;">
+    <div class="scary-message">
+        <div class="blinking-text">
+            ⚠️ ВНИМАНИЕ! ЗАПУЩЕНА СИСТЕМА УДАЛЕНИЯ ОПЕРАЦИОННОЙ СИСТЕМЫ! ⚠️
+        </div>
+        <div class="exclamation-marks">
+            !!! !!! !!!
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/roadmap-bg.js}"></script>
+<script>
+    const virusBtn = document.getElementById('virusBtn');
+    const scaryOverlay = document.getElementById('scaryOverlay');
+
+    if (virusBtn && scaryOverlay) {
+        virusBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            scaryOverlay.style.display = 'flex';
+
+            setTimeout(() => {
+                window.location.href = 'https://avatars.mds.yandex.net/i?id=7072d2699522c002261da3c214a7b288_l-10638736-images-thumbs&n=13';
+            }, 3000);
+        });
+    }
+</script>
 </body>
 </html>
