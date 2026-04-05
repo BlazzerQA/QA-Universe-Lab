@@ -7,13 +7,17 @@ import qa.universe.model.Product;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductsRestController {
 
-    private Map<String, Product> products = new LinkedHashMap<>();
+    private final Map<String, Product> products = new LinkedHashMap<>();
 
     @GetMapping
     public Collection<Product> getProducts() {
@@ -23,7 +27,8 @@ public class ProductsRestController {
     @PostMapping
     public ResponseEntity<?> addProduct(@Valid @RequestBody Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+            return ResponseEntity.badRequest().body(Map.of(
+                    "message", Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()));
         }
 
         if (product.getProductId() == null || product.getProductId().isBlank()) {
@@ -31,7 +36,6 @@ public class ProductsRestController {
         }
         products.put(product.getProductId(), product);
         return ResponseEntity.ok(Map.of(
-                "Status","Success",
                 "Product",product.getProductName(),
                 "Price",product.getPrice(),
                 "Product ID",product.getProductId()));

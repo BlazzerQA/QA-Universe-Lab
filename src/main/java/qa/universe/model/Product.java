@@ -14,7 +14,7 @@ public class Product {
     private String productName;
 
     @NotNull(message = "Цена не может быть пустой")
-    @Positive(message = "price должна быть положительна")  //может подойдет PositiveOrZero может ли цена быть 0?
+    @Positive(message = "price должна быть положительна")
     private BigDecimal price;
 
     public Product() {}
