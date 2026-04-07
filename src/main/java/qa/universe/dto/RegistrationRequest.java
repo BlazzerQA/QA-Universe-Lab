@@ -10,7 +10,7 @@ import lombok.Data;
 public class RegistrationRequest {
 
     @NotBlank(message = "Телефон обязателен")
-    @Pattern(regexp = "\\+7\\d{10}$", message = "Формат: +7XXXXXXXXXX")
+    @Pattern(regexp = "^\\+7\\d{10}$", message = "Формат: +7XXXXXXXXXX")
     private String phone;
 
     @NotBlank(message = "Пароль обязателен")

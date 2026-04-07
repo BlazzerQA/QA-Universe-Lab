@@ -25,7 +25,6 @@ public class AuthRestController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    String randomToken = UUID.randomUUID().toString();
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) {
@@ -42,6 +41,7 @@ public class AuthRestController {
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(newUser);
+        String randomToken = UUID.randomUUID().toString();
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -67,6 +67,7 @@ public class AuthRestController {
                     .body(Map.of("error", "Неверный логин или пароль"));
         }
 
+        String randomToken = UUID.randomUUID().toString();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Map.of("token", randomToken));
