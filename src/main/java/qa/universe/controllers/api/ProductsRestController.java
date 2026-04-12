@@ -36,9 +36,10 @@ public class ProductsRestController {
         }
         products.put(product.getProductId(), product);
         return ResponseEntity.ok(Map.of(
-                "Product",product.getProductName(),
-                "Price",product.getPrice(),
-                "Product ID",product.getProductId()));
+                "product", product.getProductName(),
+                "price", product.getPrice(),
+                "productId", product.getProductId()
+        ));
     }
 
     @DeleteMapping("/{productId}")
