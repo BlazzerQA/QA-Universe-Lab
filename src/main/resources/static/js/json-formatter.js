@@ -44,9 +44,6 @@ function renderJsonTree(jsonData, container) {
 
         // --- Обработка примитивов (null, string, number, boolean) ---
         if (value === null) {
-            const iconSpan = document.createElement('span');
-            iconSpan.textContent = '🚫 ';
-            contentDiv.appendChild(iconSpan);
             const valueSpan = document.createElement('span');
             valueSpan.className = 'value-null';
             valueSpan.textContent = 'null';
@@ -62,29 +59,21 @@ function renderJsonTree(jsonData, container) {
         }
 
         if (typeof value !== 'object') {
-            let icon = '';
             let displayValue = '';
             let copyValue = '';
             if (typeof value === 'string') {
-                icon = '🔤 ';
                 displayValue = `"${value}"`;
                 copyValue = value;
             } else if (typeof value === 'number') {
-                icon = '🔢 ';
                 displayValue = value;
                 copyValue = value;
             } else if (typeof value === 'boolean') {
-                icon = value ? '✔️ ' : '❌ ';
                 displayValue = value;
                 copyValue = value;
             } else {
-                icon = '📄 ';
                 displayValue = value;
                 copyValue = value;
             }
-            const iconSpan = document.createElement('span');
-            iconSpan.textContent = icon;
-            contentDiv.appendChild(iconSpan);
             const valueSpan = document.createElement('span');
             if (typeof value === 'string') valueSpan.className = 'value-string';
             else if (typeof value === 'number') valueSpan.className = 'value-number';
@@ -114,13 +103,7 @@ function renderJsonTree(jsonData, container) {
             toggleSpan.style.cursor = 'pointer';
         }
 
-        // Иконка папки
-        const folderIconSpan = document.createElement('span');
-        folderIconSpan.className = 'folder-icon';
-        folderIconSpan.textContent = '📁 ';
-
         contentDiv.appendChild(toggleSpan);
-        contentDiv.appendChild(folderIconSpan);
 
         // Открывающая скобка
         const openBracket = document.createElement('span');
@@ -180,7 +163,6 @@ function renderJsonTree(jsonData, container) {
                 expanded = !expanded;
                 childrenContainer.style.display = expanded ? 'block' : 'none';
                 toggleSpan.textContent = expanded ? '▼ ' : '▶ ';
-                folderIconSpan.textContent = expanded ? '📂 ' : '📁 ';
                 if (ellipsisSpan) {
                     ellipsisSpan.style.display = expanded ? 'none' : 'inline';
                 }
