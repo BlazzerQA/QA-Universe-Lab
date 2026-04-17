@@ -10,11 +10,11 @@ public class Product {
 
     private String productId;
 
-    @NotBlank(message = "Название продукта не может быть пустым")
+    @NotBlank(message = "Product name must not be blank")
     private String productName;
 
-    @NotNull(message = "Цена не может быть пустой")
-    @Positive(message = "price должна быть положительна")
+    @NotNull(message = "Price must not be null")
+    @Positive(message = "Price must be positive")
     private BigDecimal price;
 
     public Product() {}
