@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import qa.universe.models.User;
 import qa.universe.repositories.UserRepository;
 
@@ -14,10 +15,11 @@ public class MainApplication {
     }
 
     @Bean
-    CommandLineRunner initUsers(UserRepository userRepository) {
+    CommandLineRunner initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (userRepository.findUserByPhone("+79991234567").isEmpty()) {
-                userRepository.save(new User(null, "+79991234567", "password123"));
+                String encodedPassword = passwordEncoder.encode("password123");
+                userRepository.save(new User(null, "+79991234567", encodedPassword));
                 System.out.println("Тестовый пользователь создан!");
             }
         };
