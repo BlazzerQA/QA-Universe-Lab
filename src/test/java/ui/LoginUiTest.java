@@ -21,10 +21,6 @@ public class LoginUiTest extends UiBaseTest {
         open("/login");
         $("h1").shouldHave(text("QA Universe Auth"));
         loginPage.login("+79991234567", "password123");
-
-        // Просто ждём немного после логина
-        sleep(2000);
-
         roadmapPage.header.shouldHave(text("Roadmap: QA Automation"));
         roadmapPage.logout();
         $("button").shouldBe(visible);
