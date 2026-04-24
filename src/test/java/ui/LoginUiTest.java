@@ -31,7 +31,7 @@ public class LoginUiTest extends UiBaseTest {
     public void testInvalidPasswordShowsError() {
         open("/login");
         loginPage.login("+79991234567", "wrong-password");
-        loginPage.checkErrorMessage("Неверный пароль!");
+        loginPage.checkErrorMessage("Неверный логин или пароль!");
         $("h1").shouldHave(text("QA Universe Auth"));
     }
 
