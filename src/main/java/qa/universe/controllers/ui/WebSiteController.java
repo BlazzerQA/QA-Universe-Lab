@@ -2,6 +2,7 @@ package qa.universe.controllers.ui;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ public class WebSiteController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String redirectToLogin() {
@@ -42,10 +46,10 @@ public class WebSiteController {
         // Ищем юзера в БД по телефону
         Optional<User> userInDb = userRepository.findUserByPhone(request.getPhone());
 
-        if (userInDb.isPresent() && userInDb.get().getPassword().equals(request.getPassword())) {
+        if (userInDb.isPresent() && passwordEncoder.matches(request.getPassword(),userInDb.get().getPassword())) {
             return "redirect:/roadmap";
         } else {
-            model.addAttribute("error","Неверный пароль!");
+            model.addAttribute("error","Неверный логин или пароль!");
             return "login";
         }
     }
