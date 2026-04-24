@@ -20,7 +20,76 @@ body {
     pointer-events: none; /* чтобы canvas не перехватывал клики */
 }
 
-.login-card {
+
+/* Вкладки */
+.tabs {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-btn.active {
+    color: #00ff41;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00ff41;
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
+}
+
+.tab-btn:hover:not(.active)::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 255, 65, 0.4);
+    border-radius: 2px;
+}
+
+.tab-btn:hover:not(.active) {
+    color: #ddd;
+}
+
+/* Контейнер для формы */
+.form-container {
+    transition: all 0.3s ease;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.login-card, .register-card {
     position: relative;
     z-index: 1;
     background: rgba(20, 20, 30, 0.35);
@@ -60,10 +129,24 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s;
-    animation: pulse 1.5s infinite;
 }
 
 button:hover { background-color: #00cc33; }
+
+.error-text {
+    color: #ff4c4c;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* ← 5. Стили для сообщения об успехе */
+.success-text {
+    color: #00ff41;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
 
 @keyframes pulse {
     0% {
