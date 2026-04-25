@@ -59,9 +59,13 @@ public class WebSiteController {
     }
 
     @GetMapping("/roadmap")
-    @Deprecated
     public String showRoadmap(HttpSession session, Model model) {
-        return "redirect:/main";
+        String userName = (String) session.getAttribute("userName");
+        if (userName == null || userName.isEmpty()) {
+            userName = (String) session.getAttribute("userPhone");
+        }
+        model.addAttribute("userName", userName);
+        return "roadmap";
     }
 
     @GetMapping("/main")
