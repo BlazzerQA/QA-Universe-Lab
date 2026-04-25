@@ -1,15 +1,14 @@
 package qa.universe.controllers.api;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import qa.universe.dto.LoginRequest;
+import qa.universe.dto.ProfileRequest;
 import qa.universe.dto.RegistrationRequest;
 import qa.universe.models.User;
 import qa.universe.repositories.UserRepository;
@@ -73,4 +72,42 @@ public class AuthRestController {
                 .body(Map.of("token", randomToken));
     }
 
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Не авторизован"));
+        }
+
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Пользователь не найден"));
+        }
+
+        ProfileRequest dto = new ProfileRequest();
+        dto.setPhone(user.getPhone());
+        dto.setFullName(user.getFullName());
+
+        return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(@RequestBody ProfileRequest profileDto, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Не авторизован"));
+        }
+
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Пользователь не найден"));
+        }
+
+        user.setFullName(profileDto.getFullName());
+        userRepository.save(user);
+
+        session.setAttribute("userName", user.getFullName());
+
+        return  ResponseEntity.ok(Map.of("message","Данные обновлены", "fullName", user.getFullName()));
+    }
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль | QA Universe</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+</head>
+<body>
+<div class="container">
+    <div class="profile-card">
+        <h1>👤 Мой профиль</h1>
+
+        <div class="form-group">
+            <label>Телефон</label>
+            <input type="text" id="phone" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Имя</label>
+            <input type="text" id="fullName" placeholder="Введите ваше имя">
+        </div>
+
+        <button id="saveBtn">💾 Сохранить</button>
+        <p id="message" class="message" style="display: none;"></p>
+
+        <div class="back-link">
+            <a href="/roadmap">← Назад к Roadmap</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Загружаем данные профиля
+    async function loadProfile() {
+        try {
+            const response = await fetch('/api/auth/profile');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('phone').value = data.phone;
+                document.getElementById('fullName').value = data.fullName || '';
+            } else if (response.status === 401) {
+                window.location.href = '/login';
+            }
+        } catch (error) {
+            console.error('Ошибка загрузки профиля:', error);
+        }
+    }
+
+    // Сохраняем изменения
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+        const fullName = document.getElementById('fullName').value;
+        const messageEl = document.getElementById('message');
+
+        try {
+            const response = await fetch('/api/auth/profile', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fullName: fullName })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                messageEl.textContent = '✅ ' + data.message;
+                messageEl.style.color = '#00ff41';
+                messageEl.style.display = 'block';
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 3000);
+            } else {
+                const error = await response.json();
+                messageEl.textContent = '❌ Ошибка: ' + (error.error || 'неизвестная ошибка');
+                messageEl.style.color = '#ff4c4c';
+                messageEl.style.display = 'block';
+            }
+        } catch (error) {
+            messageEl.textContent = '❌ Ошибка сети';
+            messageEl.style.color = '#ff4c4c';
+            messageEl.style.display = 'block';
+        }
+    });
+
+    // Загружаем профиль при открытии страницы
+    loadProfile();
+</script>
+</body>
+</html>

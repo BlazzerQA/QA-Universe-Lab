@@ -1,5 +1,6 @@
 package qa.universe.controllers.ui;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +38,7 @@ public class WebSiteController {
 
     @PostMapping("/login")
     public String performLogin(@Valid @ModelAttribute("loginRequest") LoginRequest request,
-                               BindingResult bindingResult, Model model) {
+                               BindingResult bindingResult, Model model, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
             return "login";
@@ -47,6 +48,9 @@ public class WebSiteController {
         Optional<User> userInDb = userRepository.findUserByPhone(request.getPhone());
 
         if (userInDb.isPresent() && passwordEncoder.matches(request.getPassword(),userInDb.get().getPassword())) {
+            session.setAttribute("userId", userInDb.get().getId());
+            session.setAttribute("userPhone", userInDb.get().getPhone());
+            session.setAttribute("userName", userInDb.get().getFullName());
             return "redirect:/roadmap";
         } else {
             model.addAttribute("error","Неверный логин или пароль!");
@@ -55,12 +59,23 @@ public class WebSiteController {
     }
 
     @GetMapping("/roadmap")
-    public String showRoadmap() {
+    public String showRoadmap(HttpSession session, Model model) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName == null || userName.isEmpty()) {
+            userName = (String) session.getAttribute("userPhone");
+        }
+        model.addAttribute("userName", userName);
         return "roadmap";
     }
 
+    @GetMapping("/profile")
+    public String showProfile() {
+        return "profile";
+    }
+
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "redirect:/login";
     }
 
