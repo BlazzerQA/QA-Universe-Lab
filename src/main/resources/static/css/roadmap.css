@@ -320,7 +320,8 @@ li { margin-bottom: 10px; color: #bbb; }
     transition: transform 0.2s;
 }
 
-.dropdown:hover .dropdown-arrow {
+/* Поворот стрелки только когда дропдаун открыт (по клику) */
+.dropdown.open .dropdown-arrow {
     transform: rotate(180deg);
 }
 
@@ -341,8 +342,8 @@ li { margin-bottom: 10px; color: #bbb; }
     transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
 }
 
-.dropdown:hover .dropdown-content,
-.dropdown-content:hover {
+/* Показ меню только когда дропдаун открыт (по клику) */
+.dropdown.open .dropdown-content {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
