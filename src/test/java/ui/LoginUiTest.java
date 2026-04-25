@@ -4,7 +4,7 @@ import core.UiBaseTest;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.RoadmapPage;
+import pages.MainPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class LoginUiTest extends UiBaseTest {
 
     LoginPage loginPage = new LoginPage();
-    RoadmapPage roadmapPage = new RoadmapPage();
+    MainPage mainPage = new MainPage();
 
     @Test
     @Description("Проверка полного успешного пути пользователя")
@@ -21,8 +21,8 @@ public class LoginUiTest extends UiBaseTest {
         open("/login");
         $("h1").shouldHave(text("QA Universe Auth"));
         loginPage.login("+79991234567", "password123");
-        roadmapPage.header.shouldHave(text("Roadmap: QA Automation"));
-        roadmapPage.logout();
+        mainPage.header.shouldHave(text("QA Universe"));
+        mainPage.logout();
         $("button").shouldBe(visible);
     }
 

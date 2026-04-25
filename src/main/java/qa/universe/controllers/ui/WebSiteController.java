@@ -51,7 +51,7 @@ public class WebSiteController {
             session.setAttribute("userId", userInDb.get().getId());
             session.setAttribute("userPhone", userInDb.get().getPhone());
             session.setAttribute("userName", userInDb.get().getFullName());
-            return "redirect:/roadmap";
+            return "redirect:/main";
         } else {
             model.addAttribute("error","Неверный логин или пароль!");
             return "login";
@@ -59,13 +59,19 @@ public class WebSiteController {
     }
 
     @GetMapping("/roadmap")
+    @Deprecated
     public String showRoadmap(HttpSession session, Model model) {
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main")
+    public String showMainPage(HttpSession session, Model model) {
         String userName = (String) session.getAttribute("userName");
         if (userName == null || userName.isEmpty()) {
             userName = (String) session.getAttribute("userPhone");
         }
         model.addAttribute("userName", userName);
-        return "roadmap";
+        return "main";
     }
 
     @GetMapping("/profile")

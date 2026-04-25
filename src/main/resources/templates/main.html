@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная | QA Universe</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+</head>
+<body>
+<div class="floating-background"> </div>
+
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+    <h1>QA Universe</h1>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="avatar">
+                <img th:src="@{/images/java-logo.png}" alt="Java" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+                <span class="avatar-name" th:text="${userName != null && userName != '' ? userName : 'Пользователь'}"></span>
+                <span class="avatar-label">Профиль</span>
+            </div>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="/profile">👤 Мой профиль</a>
+            <a href="/logout">🚪 Выйти</a>
+        </div>
+    </div>
+</div>
+
+<!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+<div class="container">
+    <div class="button-group">
+        <a href="/json-formatter" class="json-btn">JSON Formatter</a>
+        <a href="javascript:void(0)" id="virusBtn" class="virus-btn">☠️ НЕ НАЖИМАТЬ!</a>
+    </div>
+
+    <div class="topic-card">
+        <a href="/collections" style="text-decoration: none;">
+            <h3>1. Java Collections →</h3>
+        </a>
+        <ul><li>List, Set, Map — база для обработки данных в тестах.</li></ul>
+    </div>
+    <div class="topic-card">
+        <a href="/mocks" style="text-decoration: none;">
+            <h3>2. Mocks & Stubs →</h3>
+        </a>
+        <ul><li>Mockito — учимся изолировать систему от внешних сервисов.</li></ul>
+    </div>
+    <div class="topic-card">
+        <h3>3. API Testing</h3>
+        <ul><li>RestAssured — учимся тестировать бэкенд через код.</li></ul>
+    </div>
+    <div class="topic-card">
+        <h3>4. UI Testing</h3>
+        <ul><li>Selenide/Playwright — визуализация действий пользователя.</li></ul>
+    </div>
+</div>
+<div id="scaryOverlay" class="scary-overlay" style="display: none;">
+    <div class="scary-message">
+        <div class="blinking-text">
+            ⚠️ ВНИМАНИЕ! ЗАПУЩЕНА СИСТЕМА УДАЛЕНИЯ ОПЕРАЦИОННОЙ СИСТЕМЫ! ⚠️
+        </div>
+        <div class="exclamation-marks">
+            !!! !!! !!!
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/main-bg.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script>
+    const virusBtn = document.getElementById('virusBtn');
+    const scaryOverlay = document.getElementById('scaryOverlay');
+
+    if (virusBtn && scaryOverlay) {
+        virusBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            scaryOverlay.style.display = 'flex';
+
+            setTimeout(() => {
+                window.location.href = 'https://avatars.mds.yandex.net/i?id=7072d2699522c002261da3c214a7b288_l-10638736-images-thumbs&n=13';
+            }, 3000);
+        });
+    }
+</script>
+</body>
+</html>
+
