@@ -100,6 +100,26 @@ async function handleRegistration() {
             regPassword.value = '';
             regConfirm.value = '';
 
+        } else if (response.status === 400) {
+            
+            let errorMessage = 'Проверьте правильность заполнения полей';
+
+            if (data && data.errors && Array.isArray(data.errors) && data.errors.length > 0) {
+                const firstError = data.errors[0];
+                if (firstError.defaultMessage) {
+                    errorMessage = firstError.defaultMessage;
+                } else if (firstError.message) {
+                    errorMessage = firstError.message;
+                }
+            } else if (data && data.message && typeof data.message === 'string') {
+                errorMessage = data.message;
+            } else if (data && typeof data === 'string') {
+                errorMessage = data;
+            }
+
+            registerError.textContent = errorMessage;
+            registerError.style.display = 'block';
+
         } else if (response.status === 409) {
             registerError.textContent = data.error || 'Пользователь с таким телефоном уже существует';
             registerError.style.display = 'block';
