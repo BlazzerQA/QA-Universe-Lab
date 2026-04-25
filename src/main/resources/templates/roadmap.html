@@ -12,8 +12,21 @@
 <!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
 <div class="fixed-header">
     <h1>Roadmap: QA Automation</h1>
-    <div class="header-buttons">
-        <a href="/logout" class="logout-btn">ВЫЙТИ</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="avatar">
+                <img th:src="@{/images/java-logo.png}" alt="Java" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+                <span class="avatar-name" th:text="${userName != null && userName != '' ? userName : 'Пользователь'}"></span>
+                <span class="avatar-label">Профиль</span>
+            </div>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="/profile">👤 Мой профиль</a>
+            <a href="/logout">🚪 Выйти</a>
+        </div>
     </div>
 </div>
 

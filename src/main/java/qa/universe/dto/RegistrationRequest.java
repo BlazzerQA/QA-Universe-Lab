@@ -17,4 +17,5 @@ public class RegistrationRequest {
     @Size(min = 6, max = 72, message = "Пароль должен содержать от 6 до 72 символов")
     private String password;
 
+    private String fullName;
 }

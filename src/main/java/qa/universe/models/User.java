@@ -22,5 +22,14 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "full_name")
+    private String fullName;
+
+    public User(Long id, String phone, String password) {
+        this.id = id;
+        this.phone = phone;
+        this.password = password;
+        this.fullName = "";
+    }
 
 }
