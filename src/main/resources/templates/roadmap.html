@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Roadmap | QA Universe</title>
+    <link rel="stylesheet" th:href="@{/css/roadmap.css}">
+</head>
+<body>
+<div class="floating-background"></div>
+
+<div class="fixed-header">
+    <h1>Roadmap: AQA Java Interview</h1>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="avatar">
+                <img th:src="@{/images/java-logo.png}" alt="Java" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+                <span class="avatar-name" th:text="${userName != null && userName != '' ? userName : 'Пользователь'}"></span>
+                <span class="avatar-label">Профиль</span>
+            </div>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="/main">🏠 На главную</a>
+            <a href="/profile">👤 Мой профиль</a>
+            <a href="/logout">🚪 Выйти</a>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <section class="hero">
+        <h2>План подготовки к собеседованиям на AQA Java</h2>
+        <p class="subtitle">Собери фундамент, закрепи практикой и тренируй собес‑навыки как отдельный навык.</p>
+    </section>
+
+    <section class="quote-card" aria-label="Цитата">
+        <div class="quote-text">
+            «Код писать могут ИИ. Но собеседование за тебя не пройдёт ИИ».
+        </div>
+        <div class="quote-sub">
+            Твоя цель — уметь объяснить решения, компромиссы и ход мысли.
+        </div>
+    </section>
+
+    <section class="grid">
+        <article class="card">
+            <h3>1) Java Core</h3>
+            <ul>
+                <li>OOP, SOLID, исключения, generics</li>
+                <li>Collections, Stream API, Optional</li>
+                <li>Concurrency: threads, executors, locks</li>
+                <li>JVM basics: memory, GC, classloading</li>
+            </ul>
+        </article>
+
+        <article class="card">
+            <h3>2) Тестирование (теория)</h3>
+            <ul>
+                <li>Пирамида тестов, тест‑дизайн</li>
+                <li>Flaky tests, стабильность и изоляция</li>
+                <li>Что/где мокать: unit vs integration</li>
+                <li>Test data, determinism, idempotency</li>
+            </ul>
+        </article>
+
+        <article class="card">
+            <h3>3) API Testing</h3>
+            <ul>
+                <li>HTTP, статусы, headers, cookies</li>
+                <li>RestAssured: позитив/негатив/контракт</li>
+                <li>Auth: session/JWT, refresh/expiry</li>
+                <li>Логи, retries, тесты ошибок</li>
+            </ul>
+        </article>
+
+        <article class="card">
+            <h3>4) UI Testing</h3>
+            <ul>
+                <li>Selenide: Page Object, стабильные локаторы</li>
+                <li>Ожидания, синхронизация, сетевые паузы</li>
+                <li>Скриншоты, видео, отчёты Allure</li>
+                <li>Параллельный запуск, конфиги браузера</li>
+            </ul>
+        </article>
+
+        <article class="card">
+            <h3>5) Spring Boot & Data</h3>
+            <ul>
+                <li>Controllers, validation, exception handling</li>
+                <li>JPA basics: entities, relations, transactions</li>
+                <li>Testcontainers / embedded DB (где уместно)</li>
+                <li>Профили окружений: dev/test</li>
+            </ul>
+        </article>
+
+        <article class="card">
+            <h3>6) CI/CD & качество</h3>
+            <ul>
+                <li>Стабильный pipeline, отчёты, артефакты</li>
+                <li>Параллель, шардирование, quarantine</li>
+                <li>Code review, читаемость тестов</li>
+                <li>Метрики: duration, flaky rate</li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="footer-note">
+        <div class="footer-note-inner">
+            Совет: 2–3 раза в неделю делай «мини‑собес» — объясни вслух один тест/архитектурное решение за 5 минут.
+        </div>
+    </section>
+</main>
+
+<script th:src="@{/js/main-bg.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+
