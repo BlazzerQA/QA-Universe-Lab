@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Список иконок (можно использовать любые эмодзи или HTML-символы)
     const icons = ['☕', '☕', '🐞', '🐞', '🚀', '🚀', '💻', '💻', '🧪', '🧪', '🔄', '🔄', '🌐', '🌐'];
 
-
     const numIcons = 30; // Количество плавающих элементов
 
     for (let i = 0; i < numIcons; i++) {
@@ -30,3 +29,4 @@ document.addEventListener('DOMContentLoaded', () => {
         bgContainer.appendChild(icon);
     }
 });
+
