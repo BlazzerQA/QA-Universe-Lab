@@ -14,7 +14,7 @@ public class RegistrationRequest {
     private String phone;
 
     @NotBlank(message = "Пароль обязателен")
-    @Size(min = 6, message = "Пароль должен содержать минимум 6 символов")
+    @Size(min = 6, max = 72, message = "Пароль должен содержать от 6 до 72 символов")
     private String password;
 
 }
