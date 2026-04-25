@@ -4,27 +4,59 @@
   <meta charset="UTF-8">
   <title>QA Universe | Login</title>
   <link rel="stylesheet" th:href="@{/css/login.css}">
-
 </head>
-
 <body>
 <canvas id="codeCanvas"></canvas>
+
 <div class="login-card">
-  <h1>QA Universe Auth</h1>
-  <form th:action="@{/login}" th:object="${loginRequest}" method="post">
+  <!-- Вкладки для переключения между формами -->
+  <div class="tabs">
+    <button id="loginTabBtn" class="tab-btn active">Вход</button>
+    <button id="registerTabBtn" class="tab-btn">Регистрация</button>
+  </div>
+
+  <!-- ФОРМА ВХОДА -->
+  <div id="loginForm" class="form-container">
+    <form th:action="@{/login}" th:object="${loginRequest}" method="post">
+      <div class="form-group">
+        <label>Телефон:</label>
+        <input type="text" th:field="*{phone}" placeholder="+79991234567">
+        <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error-text"></p>
+      </div>
+      <div class="form-group">
+        <label>Пароль:</label>
+        <input type="password" th:field="*{password}">
+        <p th:if="${error}" th:text="${error}" class="error-text"></p>
+      </div>
+      <button type="submit">ВОЙТИ</button>
+    </form>
+  </div>
+
+  <!-- ФОРМА РЕГИСТРАЦИИ -->
+  <div id="registerForm" class="form-container" style="display: none;">
     <div class="form-group">
       <label>Телефон:</label>
-      <input type="text" th:field="*{phone}" placeholder="+79991234567">
-      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: #ff4c4c; font-size: 0.8rem;"></p>
+      <input type="text" id="regPhone" placeholder="+79991234567">
+      <p id="regPhoneError" class="error-text" style="display: none;"></p>
     </div>
     <div class="form-group">
-      <label>Пароль (qwerty):</label>
-      <input type="password" th:field="*{password}">
-      <p th:if="${error}" th:text="${error}" style="color: #ff4c4c; font-size: 0.8rem;"></p>
+      <label>Пароль (мин. 6 символов):</label>
+      <input type="password" id="regPassword">
+      <p id="regPasswordError" class="error-text" style="display: none;"></p>
     </div>
-    <button type="submit">LOGIN</button>
-  </form>
+    <div class="form-group">
+      <label>Повторите пароль:</label>
+      <input type="password" id="regConfirmPassword">
+      <p id="regConfirmError" class="error-text" style="display: none;"></p>
+    </div>
+    <button id="registerBtn">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+    <p id="registerMessage" class="success-text" style="display: none;"></p>
+    <p id="registerError" class="error-text" style="display: none;"></p>
+  </div>
 </div>
+
 <script th:src="@{/js/matrix-bg.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+
 </body>
 </html>
