@@ -200,6 +200,10 @@ body {
     font-weight: bold;
     color: #00ff41;
     display: block;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .avatar-label {
