@@ -104,13 +104,17 @@ public class AuthRestController {
         }
 
         String fullName = profileDto.getFullName();
+        if (fullName != null) {
+            fullName = fullName.trim();
+        }
+
         if (fullName != null && fullName.length() > 50) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(Map.of("error", "Имя не должно превышать 50 символов"));
         }
 
-        user.setFullName(profileDto.getFullName());
+        user.setFullName(fullName);
         userRepository.save(user);
 
         session.setAttribute("userName", user.getFullName());

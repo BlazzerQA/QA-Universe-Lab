@@ -48,8 +48,12 @@
 
     // Сохраняем изменения
     document.getElementById('saveBtn').addEventListener('click', async () => {
-        const fullName = document.getElementById('fullName').value;
+        let fullName = document.getElementById('fullName').value;
         const messageEl = document.getElementById('message');
+
+        if (fullName) {
+            fullName = fullName.trim();
+        }
 
         try {
             const response = await fetch('/api/auth/profile', {
