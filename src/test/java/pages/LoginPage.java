@@ -11,12 +11,13 @@ public class LoginPage {
 
     private final SelenideElement phoneInput = $("input[name='phone']");
     private final SelenideElement passwordInput = $("input[name='password']");
-    private final SelenideElement errorMessage = $("p[style*='color: #ff4c4c']");
+    private final SelenideElement loginButton = $("button[type='submit']");
+    private final SelenideElement errorMessage = $(".error-text");
 
     public void login(String phone, String password) {
         phoneInput.setValue(phone);
         passwordInput.setValue(password);
-        $("button").shouldHave(text("LOGIN")).click(ClickOptions.usingJavaScript());
+        loginButton.click();
     }
 
     public void checkErrorMessage(String expectedText) {
