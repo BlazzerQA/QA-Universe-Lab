@@ -108,10 +108,16 @@ public class AuthRestController {
             fullName = fullName.trim();
         }
 
-        if (fullName != null && fullName.length() > 50) {
+        if (fullName == null || fullName.isEmpty()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("error", "Имя не должно превышать 50 символов"));
+                    .body(Map.of("error", "Имя не должно быть пустым!"));
+        }
+
+        if (fullName.length() > 50) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Имя не должно превышать 50 символов!"));
         }
 
         user.setFullName(fullName);

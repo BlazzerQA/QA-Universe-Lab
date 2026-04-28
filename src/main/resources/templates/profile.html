@@ -64,7 +64,7 @@
 
             if (response.ok) {
                 const data = await response.json();
-                messageEl.textContent = '✅ ' + data.message;
+                messageEl.textContent = data.message;
                 messageEl.style.color = '#00ff41';
                 messageEl.style.display = 'block';
                 setTimeout(() => {
@@ -72,12 +72,12 @@
                 }, 3000);
             } else {
                 const error = await response.json();
-                messageEl.textContent = '❌ Ошибка: ' + (error.error || 'неизвестная ошибка');
+                messageEl.textContent = 'Ошибка: ' + (error.error || 'неизвестная ошибка');
                 messageEl.style.color = '#ff4c4c';
                 messageEl.style.display = 'block';
             }
         } catch (error) {
-            messageEl.textContent = '❌ Ошибка сети';
+            messageEl.textContent = 'Ошибка сети';
             messageEl.style.color = '#ff4c4c';
             messageEl.style.display = 'block';
         }
