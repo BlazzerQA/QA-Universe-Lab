@@ -22,17 +22,15 @@ public class LoginUiTest extends UiBaseTest {
     public void testFullUserJourney() {
 
         open("/login");
-        $("#loginTabBtn").shouldBe(visible).shouldHave(text("Вход"));
 
+        loginPage.shouldBeOnLoginPage();
         loginPage.login("+79991234567", "password123");
 
         mainPage.header.shouldBe(visible, Duration.ofSeconds(5));
         mainPage.header.shouldHave(text("QA Universe"));
-
-
         mainPage.logout();
 
-        $("#loginTabBtn").shouldBe(visible);
+        loginPage.shouldBeOnLoginPage();
     }
 
     @Test
@@ -40,11 +38,9 @@ public class LoginUiTest extends UiBaseTest {
     public void testInvalidPasswordShowsError() {
 
         open("/login");
-
         loginPage.login("+79991234567", "wrong-password");
         loginPage.checkErrorMessage("Неверный логин или пароль!");
-
-        $("#loginTabBtn").shouldBe(visible).shouldHave(text("Вход"));
+        loginPage.shouldBeOnLoginPage();
     }
 
     @Test
@@ -52,10 +48,8 @@ public class LoginUiTest extends UiBaseTest {
     public void testInvalidPhoneFormat() {
 
         open("/login");
-
         loginPage.login("8999112233", "password123");
         loginPage.checkErrorMessage("Неверный формат номера. Используйте +7XXXXXXXXXX");
-
-        $("#loginTabBtn").shouldBe(visible).shouldHave(text("Вход"));
+        loginPage.shouldBeOnLoginPage();
     }
 }

@@ -13,14 +13,19 @@ public class LoginPage {
     private final SelenideElement passwordInput = $("input[name='password']");
     private final SelenideElement loginButton = $("button[type='submit']");
     private final SelenideElement errorMessage = $(".error-text");
+    private final SelenideElement loginTab = $("#loginTabBtn");
 
     public void login(String phone, String password) {
         phoneInput.setValue(phone);
         passwordInput.setValue(password);
-        loginButton.click();
+        loginButton.shouldBe(visible).click();
     }
 
     public void checkErrorMessage(String expectedText) {
         errorMessage.shouldBe(visible).shouldHave(text(expectedText));
+    }
+
+    public void shouldBeOnLoginPage() {
+        loginTab.shouldBe(visible).shouldHave(text("Вход"));
     }
 }
