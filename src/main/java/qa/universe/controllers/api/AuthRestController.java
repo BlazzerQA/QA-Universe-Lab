@@ -103,7 +103,24 @@ public class AuthRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Пользователь не найден"));
         }
 
-        user.setFullName(profileDto.getFullName());
+        String fullName = profileDto.getFullName();
+        if (fullName != null) {
+            fullName = fullName.trim();
+        }
+
+        if (fullName == null || fullName.isEmpty()) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Имя не должно быть пустым!"));
+        }
+
+        if (fullName.length() > 50) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Имя не должно превышать 50 символов!"));
+        }
+
+        user.setFullName(fullName);
         userRepository.save(user);
 
         session.setAttribute("userName", user.getFullName());

@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label>Имя</label>
-            <input type="text" id="fullName" placeholder="Введите ваше имя">
+            <input type="text" id="fullName" placeholder="Введите ваше имя" maxlength="50">
         </div>
 
         <button id="saveBtn">💾 Сохранить</button>
@@ -48,8 +48,12 @@
 
     // Сохраняем изменения
     document.getElementById('saveBtn').addEventListener('click', async () => {
-        const fullName = document.getElementById('fullName').value;
+        let fullName = document.getElementById('fullName').value;
         const messageEl = document.getElementById('message');
+
+        if (fullName) {
+            fullName = fullName.trim();
+        }
 
         try {
             const response = await fetch('/api/auth/profile', {
@@ -60,7 +64,7 @@
 
             if (response.ok) {
                 const data = await response.json();
-                messageEl.textContent = '✅ ' + data.message;
+                messageEl.textContent = data.message;
                 messageEl.style.color = '#00ff41';
                 messageEl.style.display = 'block';
                 setTimeout(() => {
@@ -68,12 +72,12 @@
                 }, 3000);
             } else {
                 const error = await response.json();
-                messageEl.textContent = '❌ Ошибка: ' + (error.error || 'неизвестная ошибка');
+                messageEl.textContent = 'Ошибка: ' + (error.error || 'неизвестная ошибка');
                 messageEl.style.color = '#ff4c4c';
                 messageEl.style.display = 'block';
             }
         } catch (error) {
-            messageEl.textContent = '❌ Ошибка сети';
+            messageEl.textContent = 'Ошибка сети';
             messageEl.style.color = '#ff4c4c';
             messageEl.style.display = 'block';
         }

@@ -11,15 +11,21 @@ public class LoginPage {
 
     private final SelenideElement phoneInput = $("input[name='phone']");
     private final SelenideElement passwordInput = $("input[name='password']");
-    private final SelenideElement errorMessage = $("p[style*='color: #ff4c4c']");
+    private final SelenideElement loginButton = $("button[type='submit']");
+    private final SelenideElement errorMessage = $(".error-text");
+    private final SelenideElement loginTab = $("#loginTabBtn");
 
     public void login(String phone, String password) {
         phoneInput.setValue(phone);
         passwordInput.setValue(password);
-        $("button").shouldHave(text("LOGIN")).click(ClickOptions.usingJavaScript());
+        loginButton.shouldBe(visible).click();
     }
 
     public void checkErrorMessage(String expectedText) {
         errorMessage.shouldBe(visible).shouldHave(text(expectedText));
+    }
+
+    public void shouldBeOnLoginPage() {
+        loginTab.shouldBe(visible).shouldHave(text("Вход"));
     }
 }

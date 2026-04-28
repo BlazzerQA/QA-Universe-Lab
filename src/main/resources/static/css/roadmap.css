@@ -168,6 +168,8 @@ body {
     align-items: center;
     gap: 12px;
     transition: all 0.3s ease;
+    min-width: 140px;
+    white-space: nowrap;
 }
 
 .dropbtn:hover {
@@ -200,6 +202,10 @@ body {
     font-weight: bold;
     color: #00ff41;
     display: block;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .avatar-label {
