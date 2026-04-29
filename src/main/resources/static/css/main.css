@@ -372,3 +372,40 @@ li { margin-bottom: 10px; color: #bbb; }
     color: #00ff41;
 }
 
+/* Стили для плейсхолдера дашборда */
+.dashboard-placeholder {
+    background: rgba(30, 30, 40, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 30px 0;
+    padding: 40px 20px;
+    border-radius: 12px;
+    border: 2px dashed rgba(0, 255, 65, 0.3);
+    border-left: 5px solid #00ff41;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.dashboard-placeholder:hover {
+    background: rgba(30, 30, 40, 0.6);
+    border-color: rgba(0, 255, 65, 0.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.placeholder-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.placeholder-text {
+    color: #bbb;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
