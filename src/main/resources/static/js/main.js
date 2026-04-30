@@ -30,3 +30,20 @@
     });
 })();
 
+// Обработка вирусной кнопки на главной странице
+document.addEventListener('DOMContentLoaded', function() {
+    const virusBtn = document.getElementById('virusBtn');
+    const scaryOverlay = document.getElementById('scaryOverlay');
+    
+    if (virusBtn && scaryOverlay) {
+        virusBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            scaryOverlay.style.display = 'flex';
+            
+            setTimeout(() => {
+                window.location.href = 'https://avatars.mds.yandex.net/i?id=7072d2699522c002261da3c214a7b288_l-10638736-images-thumbs&n=13';
+            }, 3000);
+        });
+    }
+});

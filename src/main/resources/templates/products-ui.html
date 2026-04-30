@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин товаров | QA Universe</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/products-ui.css">
+</head>
+<body>
+<div class="floating-background"></div>
+
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+    <h1>QA Universe</h1>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="avatar">
+                <img src="/images/java-logo.png" alt="Java" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+                <span class="avatar-name">Пользователь</span>
+                <span class="avatar-label">Профиль</span>
+            </div>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="/profile">👤 Мой профиль</a>
+            <a href="/roadmap">📋 Roadmap</a>
+            <a href="/logout">🚪 Выйти</a>
+        </div>
+    </div>
+</div>
+
+<div class="products-container">
+    <h2 class="section-title">Магазин товаров</h2>
+
+    <!-- Форма добавления продукта -->
+    <div class="form-section">
+        <h3>Добавить новый продукт</h3>
+        <form id="addProductForm">
+            <div class="form-group">
+                <label for="productName">Название продукта:</label>
+                <input type="text" id="productName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Цена:</label>
+                <input type="number" id="price" class="form-control" min="0" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notification"></div>
+
+    <!-- Список продуктов -->
+    <div class="glass-card">
+        <h3>Список продуктов</h3>
+        <div id="productsList">
+            <!-- Продукты будут отображаться здесь -->
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/products-ui.js}"></script>
+<script src="/js/main-bg.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+</body>
+</html>
