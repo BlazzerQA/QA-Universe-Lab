@@ -37,6 +37,11 @@ body {
     z-index: 2;
 }
 
+.hero {
+    text-align: center;
+    margin: 40px 0;
+}
+
 .hero h2 {
     margin: 0 0 10px;
     color: #eaeaea;
