@@ -4,13 +4,35 @@
   <meta charset="UTF-8">
   <title>JSON Formatter | QA Universe</title>
   <link rel="stylesheet" th:href="@{/css/json-formatter.css}">
-
 </head>
 <body>
+<div class="floating-background"></div>
+
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+  <h1>QA Universe</h1>
+  <div class="dropdown">
+    <button class="dropbtn">
+      <div class="avatar">
+        <img th:src="@{/images/java-logo.png}" alt="Java" class="avatar-img">
+      </div>
+      <div class="avatar-info">
+        <span class="avatar-name" th:text="${userName != null && userName != '' ? userName : 'Пользователь'}"></span>
+        <span class="avatar-label">Профиль</span>
+      </div>
+      <span class="dropdown-arrow">▼</span>
+    </button>
+    <div class="dropdown-content">
+      <a href="/profile">👤 Мой профиль</a>
+      <a href="/main">🏠 На главную</a>
+      <a href="/logout">🚪 Выйти</a>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div>
     <h1>📦 JSON Formatter & Tree Viewer</h1>
-    <a href="/main" class="back-link">← На главную</a>
   </div>
   <div class="editor-area">
     <div class="input-panel">
@@ -40,6 +62,7 @@
   </div>
 </div>
 
+<script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/json-formatter.js}"></script>
 </body>
 </html>
