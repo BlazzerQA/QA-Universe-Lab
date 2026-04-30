@@ -6,29 +6,72 @@
     <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
 <body>
-<div class="container">
-    <div class="profile-card">
-        <h1>👤 Мой профиль</h1>
-
-        <div class="form-group">
-            <label>Телефон</label>
-            <input type="text" id="phone" readonly>
-        </div>
-
-        <div class="form-group">
-            <label>Имя</label>
-            <input type="text" id="fullName" placeholder="Введите ваше имя" maxlength="50">
-        </div>
-
-        <button id="saveBtn">💾 Сохранить</button>
-        <p id="message" class="message" style="display: none;"></p>
-
-        <div class="back-link">
-            <a href="/main">← На главную</a>
+<!-- ФИКСИРОВАННЫЙ ХЕДЕР -->
+<div class="fixed-header">
+    <h1>QA Universe</h1>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div class="avatar">
+                <img th:src="@{/images/java-logo.png}" alt="Java" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+                <span class="avatar-name" th:text="${userName != null && userName != '' ? userName : 'Пользователь'}"></span>
+                <span class="avatar-label">Профиль</span>
+            </div>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="/profile">👤 Мой профиль</a>
+            <a href="/main">🏠 На главную</a>
+            <a href="/logout">🚪 Выйти</a>
         </div>
     </div>
 </div>
 
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<div class="container">
+    <div class="dashboard">
+        <div class="profile-header">
+            <h1>👤 Мой профиль</h1>
+        </div>
+
+        <div class="profile-section">
+            <h2>Личные данные</h2>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <label>Телефон</label>
+                    <input type="text" id="phone" readonly>
+                </div>
+                <div class="profile-item">
+                    <label>Имя</label>
+                    <input type="text" id="fullName" placeholder="Введите ваше имя" maxlength="50">
+                </div>
+            </div>
+            <button id="saveBtn" class="save-btn">💾 Сохранить изменения</button>
+        </div>
+
+        <div class="profile-section">
+            <h2>Статистика</h2>
+            <div class="stats-placeholder">
+                <p>Тут может быть блок статистики</p>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <h2>Действия</h2>
+            <div class="actions-grid">
+                <a href="/roadmap" class="action-btn">📋 Roadmap</a>
+                <a href="/collections" class="action-btn">📚 Коллекции</a>
+                <a href="/mocks" class="action-btn">🧪 Mocks</a>
+                <a href="/json-formatter" class="action-btn">📄 JSON Formatter</a>
+            </div>
+        </div>
+
+        <p id="message" class="message" style="display: none;"></p>
+    </div>
+</div>
+
+<script th:src="@{/js/main.js}"></script>
 <script>
     // Загружаем данные профиля
     async function loadProfile() {
