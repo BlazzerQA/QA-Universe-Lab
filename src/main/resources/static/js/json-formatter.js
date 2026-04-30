@@ -234,5 +234,12 @@ if (toggleBtn && inputPanel && editorArea) {
         editorArea.classList.toggle('left-collapsed');
         const isCollapsed = inputPanel.classList.contains('collapsed');
         toggleBtn.textContent = isCollapsed ? '▶ Показать редактор JSON' : '◀ Скрыть редактор JSON';
+        
+        // Добавляем/удаляем фиксированное позиционирование
+        if (isCollapsed) {
+            toggleBtn.classList.add('fixed');
+        } else {
+            toggleBtn.classList.remove('fixed');
+        }
     });
 }

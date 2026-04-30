@@ -402,6 +402,7 @@ h3 {
     box-shadow: 0 0 6px #00ff41;
 }
 
+
 /* Свёрнутая левая панель */
 .input-panel.collapsed {
     display: none;
@@ -411,4 +412,24 @@ h3 {
 .editor-area.left-collapsed .output-panel {
     flex: 1;
     min-width: 100%;
+}
+
+/* Фиксированная кнопка при скрытии панели */
+.toggle-panel-btn.fixed {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    border-radius: 6px;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .toggle-panel-btn.fixed {
+        top: 90px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 11px;
+    }
 }
