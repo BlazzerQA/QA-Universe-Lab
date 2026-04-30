@@ -38,6 +38,12 @@
         <a href="javascript:void(0)" id="virusBtn" class="virus-btn">☠️ НЕ НАЖИМАТЬ!</a>
     </div>
 
+    <!-- Карточка с кнопкой "Магазин товаров" -->
+    <div class="topic-card" style="margin-top: 20px; cursor: pointer;" onclick="window.location.href='/products-ui'">
+        <h3>🛒 Магазин товаров</h3>
+        <p>Управление товарами через удобный интерфейс</p>
+    </div>
+
     <div class="dashboard-placeholder">
         <div class="placeholder-icon">🏗️</div>
         <div class="placeholder-text">Здесь будет дашборд с метриками. В разработке…</div>
@@ -55,22 +61,6 @@
 </div>
 <script th:src="@{/js/main-bg.js}"></script>
 <script th:src="@{/js/main.js}"></script>
-<script>
-    const virusBtn = document.getElementById('virusBtn');
-    const scaryOverlay = document.getElementById('scaryOverlay');
-
-    if (virusBtn && scaryOverlay) {
-        virusBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            scaryOverlay.style.display = 'flex';
-
-            setTimeout(() => {
-                window.location.href = 'https://avatars.mds.yandex.net/i?id=7072d2699522c002261da3c214a7b288_l-10638736-images-thumbs&n=13';
-            }, 3000);
-        });
-    }
-</script>
 </body>
 </html>
 
