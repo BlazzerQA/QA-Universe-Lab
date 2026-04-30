@@ -91,13 +91,11 @@ body {
     font-weight: bold;
     margin-right: 15px;
     transition: background 0.3s, box-shadow 0.3s;
-    animation: pulse-gold 1.5s infinite;
     display: inline-block;
 }
 .json-btn:hover {
     background-color: #e6be00;
     box-shadow: 0 0 10px #ffd700;
-    animation: none;
 }
 
 .virus-btn {
@@ -109,46 +107,18 @@ body {
     font-weight: bold;
     border: 1px solid #ff4c4c;
     transition: all 0.3s ease;
-    animation: pulse-virus 1.2s infinite;
     display: inline-block;
 }
 
 .virus-btn:hover {
     background-color: #2a2a2a;
     box-shadow: 0 0 12px #ff4c4c;
-    animation: none;
 }
 
 h3 { color: #00ff41; margin-top: 0; }
 ul { list-style: none; padding-left: 0; }
 li { margin-bottom: 10px; color: #bbb; }
 
-@keyframes pulse-gold {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-    }
-}
-
-@keyframes pulse-virus {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 76, 76, 0.5);
-        transform: scale(1);
-    }
-    50% {
-        box-shadow: 0 0 0 8px rgba(255, 76, 76, 0);
-        transform: scale(1.02);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 76, 76, 0);
-        transform: scale(1);
-    }
-}
 
 /* Контейнер для плавающих иконок */
 .floating-background {
