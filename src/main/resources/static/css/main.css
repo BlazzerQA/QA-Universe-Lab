@@ -232,6 +232,7 @@ li { margin-bottom: 10px; color: #bbb; }
     transition: all 0.3s ease;
     min-width: 140px;
     white-space: nowrap;
+    flex-wrap: nowrap;
 }
 
 .dropbtn:hover {
@@ -271,6 +272,7 @@ li { margin-bottom: 10px; color: #bbb; }
 /* Информация о пользователе */
 .avatar-info {
     text-align: left;
+    min-width: 100px;
 }
 
 .avatar-name {
@@ -282,6 +284,7 @@ li { margin-bottom: 10px; color: #bbb; }
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 20px;
 }
 
 .avatar-label {
@@ -335,6 +338,8 @@ li { margin-bottom: 10px; color: #bbb; }
     transition: 0.2s;
     border-radius: 8px;
     margin: 4px 8px;
+    min-width: 140px;
+    justify-content: flex-start;
 }
 
 .dropdown-content a:hover {
