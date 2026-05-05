@@ -5,11 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/dictionary")
 public class DictionaryController {
+
+    private static final int MAX_WORD_LENGTH = 100;
 
     private final Map<String, String> dictionary = new LinkedHashMap<>();
 
@@ -29,14 +33,35 @@ public class DictionaryController {
     }
 
     @GetMapping("/translate")
-    public ResponseEntity<?> translate(@RequestParam(required = false) String word) {
-        if (word == null || word.isBlank()) {
+    public ResponseEntity<?> translate(
+            @RequestParam(required = false) List<String> word
+    ) {
+
+        if (word == null || word.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of(
                     "error", "Parameter 'word' is required"
             ));
         }
 
-        String translation = dictionary.get(word.toLowerCase());
+        String requestWord = word.get(0);
+
+        if (requestWord == null || requestWord.isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Parameter 'word' is required"
+            ));
+        }
+
+        String normalizedWord = requestWord
+                .trim()
+                .toLowerCase(Locale.ROOT);
+
+        if (normalizedWord.length() >= MAX_WORD_LENGTH) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "error", "Word is too long"
+            ));
+        }
+
+        String translation = dictionary.get(normalizedWord);
 
         if (translation == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
@@ -45,7 +70,7 @@ public class DictionaryController {
         }
 
         return ResponseEntity.ok(Map.of(
-                "english", word.toLowerCase(),
+                "english", normalizedWord,
                 "russian", translation
         ));
     }
