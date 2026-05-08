@@ -63,6 +63,14 @@ async function addProduct() {
         return;
     }
 
+    if (!/[a-zA-Zа-яА-Я0-9]/.test(productName)) {
+        showNotification('Название товара должно содержать хотя бы одну букву или цифру', 'error');
+        nameInput.focus();
+        nameInput.classList.add('input-error');
+        setTimeout(() => nameInput.classList.remove('input-error'), 3000);
+        return;
+    }
+
     if (priceInput.value.trim() === '') {
         showNotification('Введите цену товара', 'error');
         priceInput.focus();
