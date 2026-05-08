@@ -56,12 +56,26 @@ async function addProduct() {
     const price = parseFloat(priceInput.value);
 
     if (!productName) {
-        showNotification('Название продукта не может быть пустым', 'error');
+        showNotification('Название товара не может быть пустым', 'error');
+        nameInput.focus();
+        nameInput.classList.add('input-error');
+        setTimeout(() => nameInput.classList.remove('input-error'), 3000);
+        return;
+    }
+
+    if (priceInput.value.trim() === '') {
+        showNotification('Введите цену товара', 'error');
+        priceInput.focus();
+        priceInput.classList.add('input-error');
+        setTimeout(() => priceInput.classList.remove('input-error'), 3000);
         return;
     }
 
     if (isNaN(price) || price <= 0) {
-        showNotification('Цена должна быть положительным числом', 'error');
+        showNotification('Цена должна быть больше 0', 'error');
+        priceInput.focus();
+        priceInput.classList.add('input-error');
+        setTimeout(() => priceInput.classList.remove('input-error'), 3000);
         return;
     }
 
