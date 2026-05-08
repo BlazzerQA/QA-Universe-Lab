@@ -4,7 +4,7 @@ box-sizing: border-box;
 body {
     background-color: #121212;
     color: #e0e0e0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -173,7 +173,6 @@ body {
 
 h1 {
     color: #00ff41;
-    border-bottom: 2px solid #00ff41;
     padding-bottom: 10px;
     display: inline-block;
 }
