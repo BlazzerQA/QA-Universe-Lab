@@ -79,7 +79,12 @@ public class WebSiteController {
     }
 
     @GetMapping("/profile")
-    public String showProfile() {
+    public String showProfile(HttpSession session, Model model) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName == null || userName.isEmpty()) {
+            userName = (String) session.getAttribute("userPhone");
+        }
+        model.addAttribute("userName", userName);
         return "profile";
     }
 
@@ -100,7 +105,12 @@ public class WebSiteController {
     }
 
     @GetMapping("/json-formatter")
-    public String jsonFormatterPage(Model model) {
+    public String jsonFormatterPage(HttpSession session, Model model) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName == null || userName.isEmpty()) {
+            userName = (String) session.getAttribute("userPhone");
+        }
+        model.addAttribute("userName", userName);
         String exampleJson = "{\n  \"name\": \"QA Universe\"," +
                 "\n  \"tools\": [\"Spring\", \"Thymeleaf\", \"JUnit\"]," +
                 "\n  \"config\": {\"timeout\": 30}\n}";

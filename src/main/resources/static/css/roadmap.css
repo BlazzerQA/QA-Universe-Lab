@@ -200,7 +200,7 @@ body {
     object-fit: cover;
 }
 
-.avatar-info { text-align: left; }
+.avatar-info { text-align: left; min-width: 100px; }
 
 .avatar-name {
     font-size: 14px;
@@ -211,6 +211,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 20px;
 }
 
 .avatar-label {

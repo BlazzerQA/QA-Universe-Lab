@@ -2,6 +2,7 @@ package qa.universe.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ public class Product {
     private String productId;
 
     @NotBlank(message = "Product name must not be blank")
+    @Pattern(regexp = ".*[a-zA-Zа-яА-Я0-9]+.*", message = "Product name must contain at least one letter or digit")
     private String productName;
 
     @NotNull(message = "Price must not be null")

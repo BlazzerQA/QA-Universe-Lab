@@ -1,7 +1,7 @@
 body {
     background-color: #121212;
     color: #e0e0e0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -89,6 +89,7 @@ body {
 /* Информация о пользователе */
 .avatar-info {
     text-align: left;
+    min-width: 100px;
 }
 
 .avatar-name {
@@ -100,6 +101,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 20px;
 }
 
 .avatar-label {
