@@ -12,8 +12,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoteNotFoundException.class)
     public ResponseEntity<?> handleNoteNotFound(NoteNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(Map.of("error", e.getMessage()));
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        return ResponseEntity.status(status)
+                .body(Map.of("status", status.value(), "message", e.getMessage()));
+    }
+
+    @ExceptionHandler(PathTraversalException.class)
+    public ResponseEntity<?> handlePathTraversal(PathTraversalException e) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(status)
+                .body(Map.of("status", status.value(), "message", e.getMessage()));
     }
 
     @ExceptionHandler(NoteReadException.class)

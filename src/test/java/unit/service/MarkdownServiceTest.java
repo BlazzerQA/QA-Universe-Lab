@@ -2,6 +2,7 @@ package unit.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import qa.universe.dto.NoteResponse;
 import qa.universe.exception.NoteNotFoundException;
 import qa.universe.exception.NoteReadException;
 import qa.universe.models.Note;
@@ -95,6 +96,49 @@ class MarkdownServiceTest {
         List<Note> notes = service.getAllNotes();
 
         assertTrue(notes.isEmpty());
+    }
+
+    @Test
+    void shouldReturnNoteResponseForExistingNote() {
+        NoteResponse response = markdownService.getNote("java", "collections");
+
+        assertEquals("Collections", response.getTitle());
+        assertEquals("java", response.getCategory());
+        assertEquals("java/collections.md", response.getPath());
+        assertTrue(response.getContent().contains("<h1>Java Collections</h1>"));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetNoteNotFound() {
+        assertThrows(NoteNotFoundException.class, () ->
+                markdownService.getNote("java", "unknown"));
+    }
+
+    @Test
+    void shouldRejectPathTraversalInGetNote() {
+        assertThrows(NoteReadException.class, () ->
+                markdownService.getNote("../..", "pom"));
+    }
+
+    @Test
+    void shouldHandleNoteNameWithExtension() {
+        NoteResponse response = markdownService.getNote("java", "collections.md");
+
+        assertEquals("Collections", response.getTitle());
+        assertEquals("java/collections.md", response.getPath());
+    }
+
+    @Test
+    void shouldReturnEmptyContentForEmptyNote(@TempDir Path tempDir) throws IOException {
+        Path file = tempDir.resolve("java/empty.md");
+        Files.createDirectories(file.getParent());
+        Files.createFile(file);
+
+        MarkdownService service = new MarkdownService(tempDir.toString());
+        NoteResponse response = service.getNote("java", "empty");
+
+        assertEquals("", response.getContent());
+        assertEquals("java/empty.md", response.getPath());
     }
 
     private void createFile(Path root, String relativePath) throws IOException {
