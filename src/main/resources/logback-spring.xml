@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Консольный вывод логов (читаемый формат) -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Отправка логов в Logstash по TCP в формате JSON -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5044</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <includeContext>true</includeContext>
+            <includeMdc>true</includeMdc>
+            <customFields>{"service":"qa-universe-lab"}</customFields>
+        </encoder>
+    </appender>
+
+    <!-- Уровень логирования для Spring -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="qa.universe" level="INFO"/>
+
+    <!-- Корневой логер: пишем и в консоль, и в Logstash -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+
+</configuration>

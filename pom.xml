@@ -143,6 +143,13 @@
             <version>6.4.5</version>
         </dependency>
 
+        <!-- Отправка логов в Logstash в формате JSON -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
