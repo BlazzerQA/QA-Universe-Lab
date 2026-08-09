@@ -150,6 +150,13 @@
             <version>7.4</version>
         </dependency>
 
+        <!-- Markdown-парсер для преобразования .md в HTML -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-all</artifactId>
+            <version>0.64.8</version>
+        </dependency>
+
     </dependencies>
 
     <build>
