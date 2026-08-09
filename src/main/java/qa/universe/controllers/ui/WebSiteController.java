@@ -27,7 +27,12 @@ public class WebSiteController {
 
     @GetMapping("/")
     public String redirectToLogin() {
-        return "redirect:/login"; // Перенаправляем пользователя
+        return "redirect:/login";
+    }
+
+    @GetMapping("/notes")
+    public String notesPage() {
+        return "notes";
     }
 
     @GetMapping("/login")
