@@ -131,6 +131,14 @@ body {
     overflow-y: auto;
 }
 
+.note-content {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    min-height: 100%;
+}
+
 .note-placeholder {
     display: flex;
     align-items: center;
@@ -139,6 +147,120 @@ body {
     color: #888;
     font-size: 1.1rem;
     text-align: center;
+}
+
+.note-state {
+    margin: 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.note-state.loading-state {
+    color: #888;
+}
+
+.note-state.error-state {
+    color: #ff6b6b;
+}
+
+.note-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.note-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    color: #00ff41;
+}
+
+.note-meta {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.note-body h1,
+.note-body h2,
+.note-body h3,
+.note-body h4,
+.note-body h5,
+.note-body h6 {
+    color: #00ff41;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.note-body p {
+    margin: 0 0 1rem 0;
+}
+
+.note-body ul,
+.note-body ol {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.note-body li {
+    margin-bottom: 0.25rem;
+}
+
+.note-body code {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #00ff41;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+}
+
+.note-body pre {
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0 0 1rem 0;
+}
+
+.note-body pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #e0e0e0;
+}
+
+.note-body blockquote {
+    border-left: 3px solid #00ff41;
+    margin: 0 0 1rem 0;
+    padding-left: 1rem;
+    color: #bbb;
+}
+
+.note-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.note-body th,
+.note-body td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.note-body th {
+    background-color: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
+}
+
+.note-link.active {
+    background-color: rgba(0, 255, 65, 0.2);
+    color: #00ff41;
+    font-weight: 600;
 }
 
 @media (max-width: 768px) {

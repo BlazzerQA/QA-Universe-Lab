@@ -102,7 +102,7 @@ class MarkdownServiceTest {
     void shouldReturnNoteResponseForExistingNote() {
         NoteResponse response = markdownService.getNote("java", "collections");
 
-        assertEquals("Collections", response.getTitle());
+        assertEquals("Java Collections", response.getTitle());
         assertEquals("java", response.getCategory());
         assertEquals("java/collections.md", response.getPath());
         assertTrue(response.getContent().contains("<h1>Java Collections</h1>"));
@@ -124,7 +124,7 @@ class MarkdownServiceTest {
     void shouldHandleNoteNameWithExtension() {
         NoteResponse response = markdownService.getNote("java", "collections.md");
 
-        assertEquals("Collections", response.getTitle());
+        assertEquals("Java Collections", response.getTitle());
         assertEquals("java/collections.md", response.getPath());
     }
 
