@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import qa.universe.exception.NoteNotFoundException;
 import qa.universe.exception.NoteReadException;
+import qa.universe.models.Note;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class MarkdownService {
@@ -45,5 +49,38 @@ public class MarkdownService {
         } catch (IOException e) {
             throw new NoteReadException("Failed to read note: " + relativePath, e);
         }
+    }
+
+    public List<Note> getAllNotes() {
+        if (!Files.exists(knowledgeRoot) || !Files.isDirectory(knowledgeRoot)) {
+            throw new NoteReadException("Knowledge directory not found: " + knowledgeRoot);
+        }
+
+        try (Stream<Path> paths = Files.walk(knowledgeRoot)) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .filter(p -> p.toString().endsWith(".md"))
+                    .map(this::toNote)
+                    .sorted(Comparator.comparing(Note::getCategory)
+                            .thenComparing(Note::getTitle))
+                    .toList();
+        } catch (IOException e) {
+            throw new NoteReadException("Failed to scan knowledge directory: " + knowledgeRoot, e);
+        }
+    }
+
+    private Note toNote(Path file) {
+        String relativePath = knowledgeRoot.relativize(file).toString().replace("\\", "/");
+        String fileName = file.getFileName().toString();
+        String title = fileName.substring(0, fileName.length() - 3);
+        title = title.substring(0, 1).toUpperCase() + title.substring(1);
+
+        String category = "";
+        int slashIndex = relativePath.indexOf('/');
+        if (slashIndex > 0) {
+            category = relativePath.substring(0, slashIndex);
+        }
+
+        return new Note(title, category, relativePath);
     }
 }
