@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA University Lab</title>
+    <link rel="stylesheet" th:href="@{/css/notes.css}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>QA University Lab</h1>
+    </header>
+
+    <main class="page-layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav" aria-label="Knowledge categories">
+                <h2>Knowledge</h2>
+                <div id="sidebarContent" class="sidebar-content">
+                    <p class="state-message loading-state">Loading notes...</p>
+                </div>
+            </nav>
+        </aside>
+
+        <section class="content-area" id="contentArea" aria-label="Note content">
+            <article id="noteContent" class="note-content note-placeholder">
+                <p>Выберите статью из меню</p>
+            </article>
+        </section>
+    </main>
+
+    <script th:src="@{/js/notes.js}"></script>
+</body>
+</html>

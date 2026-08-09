@@ -1,8 +1,10 @@
 package qa.universe.service;
 
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import qa.universe.dto.NoteResponse;
@@ -18,6 +20,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @Service
@@ -30,6 +34,7 @@ public class MarkdownService {
     public MarkdownService(@Value("${knowledge.path}") String knowledgePath) {
         this.knowledgeRoot = Paths.get(knowledgePath).toAbsolutePath().normalize();
         MutableDataSet options = new MutableDataSet();
+        options.set(Parser.EXTENSIONS, List.of(TablesExtension.create()));
         this.parser = Parser.builder(options).build();
         this.renderer = HtmlRenderer.builder(options).build();
     }
@@ -57,7 +62,10 @@ public class MarkdownService {
         String baseName = stripExtension(noteName);
         String relativePath = category + "/" + baseName + ".md";
         String content = getNoteContent(relativePath);
-        String title = capitalize(baseName);
+        String title = extractTitleFromHtml(content);
+        if (title == null) {
+            title = capitalize(baseName);
+        }
         return new NoteResponse(title, category, relativePath, content);
     }
 
@@ -96,8 +104,13 @@ public class MarkdownService {
     private Note toNote(Path file) {
         String relativePath = knowledgeRoot.relativize(file).toString().replace("\\", "/");
         String fileName = file.getFileName().toString();
-        String title = fileName.substring(0, fileName.length() - 3);
-        title = title.substring(0, 1).toUpperCase() + title.substring(1);
+        String fallbackTitle = fileName.substring(0, fileName.length() - 3);
+        fallbackTitle = fallbackTitle.substring(0, 1).toUpperCase() + fallbackTitle.substring(1);
+
+        String title = extractTitleFromFile(file);
+        if (title == null) {
+            title = fallbackTitle;
+        }
 
         String category = "";
         int slashIndex = relativePath.indexOf('/');
@@ -106,5 +119,36 @@ public class MarkdownService {
         }
 
         return new Note(title, category, relativePath);
+    }
+
+    private String extractTitleFromFile(Path file) {
+        try {
+            String markdown = Files.readString(file, StandardCharsets.UTF_8);
+            return extractTitle(markdown);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private String extractTitle(String markdown) {
+        if (markdown == null || markdown.isBlank()) {
+            return null;
+        }
+        Matcher matcher = Pattern.compile("^#\\s+(.+)$", Pattern.MULTILINE).matcher(markdown);
+        if (matcher.find()) {
+            return matcher.group(1).trim();
+        }
+        return null;
+    }
+
+    private String extractTitleFromHtml(String html) {
+        if (html == null || html.isBlank()) {
+            return null;
+        }
+        Matcher matcher = Pattern.compile("<h1[^>]*>(.*?)</h1>", Pattern.CASE_INSENSITIVE | Pattern.DOTALL).matcher(html);
+        if (matcher.find()) {
+            return matcher.group(1).trim().replaceAll("<[^>]+>", "");
+        }
+        return null;
     }
 }
