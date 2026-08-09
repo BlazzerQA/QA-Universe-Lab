@@ -5,8 +5,10 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import qa.universe.dto.NoteResponse;
 import qa.universe.exception.NoteNotFoundException;
 import qa.universe.exception.NoteReadException;
+import qa.universe.exception.PathTraversalException;
 import qa.universe.models.Note;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class MarkdownService {
         Path resolved = knowledgeRoot.resolve(relativePath).normalize();
 
         if (!resolved.startsWith(knowledgeRoot)) {
-            throw new NoteReadException("Path escapes knowledge directory: " + relativePath);
+            throw new PathTraversalException("Path escapes knowledge directory: " + relativePath);
         }
 
         if (!Files.exists(resolved) || !Files.isRegularFile(resolved)) {
@@ -49,6 +51,28 @@ public class MarkdownService {
         } catch (IOException e) {
             throw new NoteReadException("Failed to read note: " + relativePath, e);
         }
+    }
+
+    public NoteResponse getNote(String category, String noteName) {
+        String baseName = stripExtension(noteName);
+        String relativePath = category + "/" + baseName + ".md";
+        String content = getNoteContent(relativePath);
+        String title = capitalize(baseName);
+        return new NoteResponse(title, category, relativePath, content);
+    }
+
+    private String stripExtension(String fileName) {
+        if (fileName != null && fileName.toLowerCase().endsWith(".md")) {
+            return fileName.substring(0, fileName.length() - 3);
+        }
+        return fileName;
+    }
+
+    private String capitalize(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        return value.substring(0, 1).toUpperCase() + value.substring(1);
     }
 
     public List<Note> getAllNotes() {
