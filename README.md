@@ -51,3 +51,13 @@ mvn clean test
 
 # Открыть Allure отчет
 mvn allure:serve
+```
+
+---
+
+## 📖 Swagger / OpenAPI
+
+После запуска приложения (`mvn spring-boot:run`) Swagger доступен по адресам:
+
+- **Swagger UI** — http://localhost:8080/swagger-ui/index.html
+- **OpenAPI JSON** — http://localhost:8080/v3/api-docs
